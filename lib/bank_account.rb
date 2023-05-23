@@ -4,25 +4,58 @@ class BankAccount
       end
 
   def withdraw(amount) 
-  # amount is an amount of money being deposited
-    # amount gets turned into instance of Transaction with date 
-    # maybe Time.now.strftime("%d/%m/%Y %H:%M") #=> "14/09/2011 14:09" removing time when printing
-    # is loaded into transactions array
-    # Returns nothing
+    new_transaction = Transaction.new("%d/%m/%Y", 0, amount)
+    @transactions << new_transaction
   end
 
   def deposit(amount)
-    # amount gets turned into instance of Transaction with date
-    # is loaded into transactions array
+    new_transaction = Transaction.new("%d/%m/%Y", amount, 0)
+    @transactions << new_transaction
   end
 
-  def gets_transactions_with_balance
-    # transforms transaction object into hash with balance
+  def transactions
+    return @transactions
+  end
+
+#   def balance
+#     balance = 0
+#      @transactions.each do |transaction|
+#         if transaction.credit > 0 
+#             balance += transaction.credit
+#         else 
+#             balance -= transaction.debit
+#         end
+#      end
+#      return balance
+#   end
+
+  def transactions_including_balance
+
+    balence = 0
+    transactions_including_balance = []
+
+    @transactions.each do |transaction| 
+        if transaction.credit > 0
+            balence += transaction.credit
+            transactions_including_balance << {
+            date: transaction.date,
+            credit: transaction.credit,
+            debit: transaction.debit,
+            balance: balance }
+        else
+            balance -= transaction.debit 
+            transactions_including_balance << {
+            date: transaction.date,
+            credit: transaction.credit,
+            debit: transaction.debit,
+            balance: balance }
+        end
+
+    return transactions_including_balance
+  end
   
   def print_statement # keyword is a string
     # Prints a list of transaction in descending date order
   end
 end
-end
 
-account = transaction.new 
