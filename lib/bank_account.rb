@@ -1,15 +1,23 @@
+require 'date'
+
 class BankAccount
     def initialize
         @transactions = []
       end
 
-  def withdraw(amount) 
-    new_transaction = Transaction.new("%d/%m/%Y", 0, amount)
+  def withdraw(date, amount) 
+    date_string = date
+    date_format = "%d/%m/%Y"
+    new_date = Date.strptime(date_string, date_format)
+    new_transaction = Transaction.new(new_date, 0, amount)
     @transactions << new_transaction
   end
 
-  def deposit(amount)
-    new_transaction = Transaction.new("%d/%m/%Y", amount, 0)
+  def deposit(date, amount)
+    date_string = date
+    date_format = "%d/%m/%Y"
+    new_date = Date.strptime(date_string, date_format)
+    new_transaction = Transaction.new(new_date, amount, 0)
     @transactions << new_transaction
   end
 
@@ -54,7 +62,7 @@ class BankAccount
     return transactions_including_balance
   end
   
-  def bank_statement 
+  def account_statement 
     puts "date  ||  credit  ||  debit  || balance"
 
     transactions_including_balance.each do |transaction|
