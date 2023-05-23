@@ -31,12 +31,12 @@ class BankAccount
 
   def transactions_including_balance
 
-    balence = 0
+    balance = 0
     transactions_including_balance = []
 
     @transactions.each do |transaction| 
         if transaction.credit > 0
-            balence += transaction.credit
+            balance += transaction.credit
             transactions_including_balance << {
             date: transaction.date,
             credit: transaction.credit,
@@ -50,12 +50,21 @@ class BankAccount
             debit: transaction.debit,
             balance: balance }
         end
-
+    end 
     return transactions_including_balance
   end
   
-  def print_statement # keyword is a string
-    # Prints a list of transaction in descending date order
+  def bank_statement 
+    puts "date  ||  credit  ||  debit  || balance"
+
+    transactions_including_balance.each do |transaction|
+        date = transaction[:date]
+        credit = transaction[:credit]
+        debit = transaction[:debit]
+        balance = transaction[:balance]
+
+        puts "#{date} ||  #{credit}  || #{debit}  || #{balance} "
+    end
   end
 end
 
