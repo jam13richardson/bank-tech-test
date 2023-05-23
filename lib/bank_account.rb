@@ -63,7 +63,7 @@ class BankAccount
   end
   
   def account_statement 
-    puts "date  ||  credit  ||  debit  || balance"
+    puts "date  ||  credit  ||  debit  ||  balance"
 
     transactions_including_balance.each do |transaction|
         date = transaction[:date]
@@ -71,7 +71,7 @@ class BankAccount
         debit = transaction[:debit]
         balance = transaction[:balance]
 
-        puts "#{date} ||  #{credit}  || #{debit}  || #{balance} "
+        puts "#{date}  ||  #{credit}  ||  #{debit}  ||  #{balance} "
     end
   end
 end
