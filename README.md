@@ -1,14 +1,14 @@
-# Bank tech test
+## Overview
 
-Today, you'll practice doing a tech test.
+A programme that allows a user to manage their personal finances.
 
-For most tech tests, you'll essentially have unlimited time.  This practice session is about producing the best code you can when there is a minimal time pressure.
+## User Stories 
 
-You'll get to practice your OO design and TDD skills.
+As a client, so I can keep track of my finances I want to be able to make deposits.
 
-You'll work alone, and you'll also review your own code so you can practice reflecting on and improving your own work.
+As a client, so I can keep track of my finances I want to be able to make withdrawals.
 
-## Specification
+As a client, so I can keep track of my money I want to be able to print account statements showing date, amount and balance
 
 ### Requirements
 
@@ -32,3 +32,9 @@ date || credit || debit || balance
 10/01/2023 || 1000.00 || || 1000.00
 ```
 
+### Approach 
+
+* I followed a TDD, OOP approach
+* Two class system to ensure that the program was future proof, otherwise the test could've been run with a single class
+* BankAccount manages deposit, withdraw, getting all transactions with balance, and account statements
+* Transaction initialiszed date, credit and debit 
