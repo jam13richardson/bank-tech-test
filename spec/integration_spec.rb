@@ -54,5 +54,4 @@ RSpec.describe BankAccount do
         "2023-01-14  ||  0  ||  500  ||  2500 \n" 
         expect { account.account_statement }.to output(expected_account_statement).to_stdout
     end
-
 end

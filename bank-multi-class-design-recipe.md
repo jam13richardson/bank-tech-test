@@ -1,11 +1,11 @@
 Bank Multi-Class Planned Design Recipe
 
 1. Describe the Problem
-As an account holder, so I can keep track of my money I want to be able to make deposits.
+As a client, so I can keep track of my finances I want to be able to make deposits.
 
-As an account holder, so I can keep track of my money I want to be able to make withdrawals.
+As a client, so I can keep track of my finances I want to be able to make withdrawals.
 
-As an account holder, so I can keep track of my money I want to be able to print account statements showing date, amount and balance
+As a client, so I can keep track of my money I want to be able to print account statements showing date, amount and balance
 
 Given a client makes a deposit of 1000 on 10-01-2023
 And a deposit of 2000 on 13-01-2023
@@ -49,98 +49,61 @@ Consider diagramming out the classes and their relationships. Take care to focus
 class Transaction
   attr_reader :date, :credit, :debit
 
-  def initialize(date, credit, debit) # date is date format, credit and debit are integers
+  def initialize(date, credit, debit) 
   end
 
+
+class BankAccount
+    def initialize
+        @transactions = []
+      end
+
+  def withdraw(date, amount) 
+  end
+
+  def deposit(date, amount)
+  end
+
+  def balance 
+  end
+
+  def transactions_including_balance
+  end
+
+  def account_statement 
+    end
 end
+
 3. Create Examples as Integration Tests
 Create examples of the classes being used together in different situations and combinations that reflect the ways in which the system will be used.
 
 # EXAMPLE
 
+  it 'debit transaction is added to transactions array' do 
+        account = BankAccount.new
+        account.withdraw(1000)
+        expect(account.transactions.length).to eq(1)
+    end
 
-####  integration tests
+    it 'credit transaction is added to transactions array' do 
+        account = BankAccount.new
+        account.deposit(1000)
+        expect(account.transactions.length).to eq(1)
+    end
 
-# returns no transactions when there have been no deposits or withdrawals
+    it 'calculates overall balance' do 
+        account = BankAccount.new
+        account.deposit(3000)
+        account.withdraw(1000)
+        expect(account.balance).to eq(2000)
+    end
 
-my_account = BankAccount.new
-my_account.deposit(1000.00)
-expect(my_account.get_transactions.length).to eq(1)
 
-my_account = BankAccount.new
-my_account.deposit(1000.00)
-my_account.withdraw(1000.00)
-expect(my_account.get_transactions.length).to eq(2)
 
-my_account = BankAccount.new
-my_account.deposit(300)
-result = my_account.gets_transactions_with_balance
-expect(result[0][:balance])to eq (300.00)
-
-my_account = BankAccount.new
-my_account.deposit(400.00)
-result = my_account.get_transactions
-expect(result[0].credit).to eq (400.00)
-
-my_account = BankAccount.new
-my_account.withdraw(700.00)
-result = my_account.get_transactions
-expect(result[0].credit).to eq (700.00)
-
-my_account = BankAccount.new
-my_account.deposit(400.00)
-expect(my_account.print_statement).to include("400.00") #not sure if this will work
 
 4. Create Examples as Unit Tests
 Create examples, where appropriate, of the behaviour of each relevant class at a more granular level of detail.
 
-######## BankAccount class unit tests ########## 
-
-#############it is empty################
-my_account = BankAccount.new
-expect(my_account.get_transactions_with_balance).to eq([])
-
-
-########## tests get_transactions_with_balance in isolation ###########
-my_account = BankAccount.new
-transactions = [
-        instance_double(Transaction, date: Time.now.strftime("22/03/2023"), credit: 100, debit: 0),
-        instance_double(Transaction, date: Time.now.strftime("23/03/2023"), credit: 0, debit: 50),
-        instance_double(Transaction, date: Time.now.strftime("24/03/2023"), credit: 200, debit: 0)
-      ]
-my_account.instance_variable_set(:@transactions, transactions)
- expect(my_account.get_transactions_with_balance).to eq([
-        {date: Time.now.strftime("22/03/2023"), credit: 100, debit: 0, balance: 100},
-        {date: Time.now.strftime("23/03/2023"), credit: 0, debit: 50, balance: 50},
-        {date: Time.now.strftime("24/03/2023"), credit: 200, debit: 0, balance: 250}
-      ])
-
-########## tests print_statement in isolation ###########
-my_account = BankAccount.new
-transactions = [
-        instance_double(Transaction, date: Time.now.strftime("22/03/2023"), credit: 100, debit: 0),
-        instance_double(Transaction, date: Time.now.strftime("23/03/2023"), credit: 0, debit: 50),
-        instance_double(Transaction, date: Time.now.strftime("24/03/2023"), credit: 200, debit: 0)
-      ]
-my_account.instance_variable_set(:@transactions, transactions)
-expect(my_account.print_statement.lines[1..-1].join).to eq("24/03/2023 || 200.00 ||  || 200.00, 23/03/2023 ||   || 50.00 || 150.00, 22/03/2023 || 100.00 ||  || 250.00")
-
-########## tests withdraw isolation ###########
-
-?????????????????
-
-########## tests deposit in isolation ###########
-
-???????????????????????
-
-################## transaction unit tests ########################
-
-# ########## it constructs ########
-transaction = Transaction.new("23/03/2023", 100, 0)
-expect(transaction.date).to eq "23/03/2023"
-expect(transaction.credit).to eq 100
-expect(transaction.debit).to eq 0
-Encode each example as a test. You can add to the above list as you go.
 
 5. Implement the Behaviour
 After each test you write, follow the test-driving process of red, green, refactor to implement the behaviour.
