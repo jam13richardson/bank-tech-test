@@ -3,7 +3,7 @@ require 'date'
 class BankAccount
     def initialize
         @transactions = []
-      end
+    end
 
   def withdraw(date, amount) 
     date_string = date
