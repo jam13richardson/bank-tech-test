@@ -38,3 +38,21 @@ date || credit || debit || balance
 * Two class system to ensure that the program was future proof, otherwise the test could've been run with a single class
 * BankAccount manages deposit, withdraw, getting all transactions with balance, and account statements
 * Transaction initialiszed date, credit and debit 
+* All tests pass using RSpec (see testing.png)
+
+### Running the code
+1. Require the relevant files
+require './bank_account.rb'
+require './transaction.rb'
+
+2. In this command, date is a string that is transformed into a date format and amount is an integer
+account.deposit("10/01/2023", 1000)
+account.deposit("13/01/2023", 2000)
+
+4. Once again, date is a string that is transformed into a date format and amount is an integer
+account.withdraw("14/01/2023", 500)
+
+5. Account statement is printed 
+account.account_statement
+
+(see working-example.png for terminal entries)
